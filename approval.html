@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approved - Max it BW</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body class="app-page">
+    <div class="app-container">
+        <!-- Header -->
+        <div class="app-header">
+            <div class="logo-small">💰 Max it BW</div>
+            <div class="security-indicator success">
+                <span class="check-icon">✓</span>
+                <span>Verified</span>
+            </div>
+        </div>
+
+        <!-- Progress Bar -->
+        <div class="progress-wrapper">
+            <div class="progress-steps">
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Personal Details</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Verification</span>
+                </div>
+                <div class="step-line completed"></div>
+                <div class="step-item completed">
+                    <div class="step-circle">✓</div>
+                    <span>Approval</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Screen -->
+        <div class="form-card approval-card">
+            <div class="success-animation">
+                <div class="success-checkmark">
+                    <div class="check-icon-large">✓</div>
+                </div>
+            </div>
+
+            <h1 class="approval-title">Congratulations!</h1>
+            <p class="approval-subtitle">Your loan application has been approved</p>
+
+            <div class="approval-box">
+                <div class="approval-badge">APPROVED</div>
+                <div class="loan-amount-display">
+                    <span class="amount-label">You Qualify For</span>
+                    <span class="amount-value" id="approvedAmount">P0</span>
+                    <span class="amount-note">Based on your application</span>
+                </div>
+            </div>
+
+            <div class="loan-details-grid">
+                <div class="detail-card">
+                    <div class="detail-icon">💰</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Loan Amount</span>
+                        <span class="detail-value" id="loanAmountDetail">P0</span>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">📅</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Repayment Period</span>
+                        <span class="detail-value" id="repaymentPeriodDetail">12 months</span>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">💳</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Monthly Payment</span>
+                        <span class="detail-value" id="monthlyPaymentDetail">P0</span>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">📊</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Interest Rate</span>
+                        <span class="detail-value">12% APR</span>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">📈</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Total Repayment</span>
+                        <span class="detail-value" id="totalRepaymentDetail">P0</span>
+                    </div>
+                </div>
+
+                <div class="detail-card">
+                    <div class="detail-icon">⚡</div>
+                    <div class="detail-content">
+                        <span class="detail-label">Disbursement</span>
+                        <span class="detail-value">24 hours</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box success">
+                <div class="info-content">
+                    <p><strong>🎉 What's Next?</strong></p>
+                    <ul class="next-steps">
+                        <li>✓ Your application has been approved</li>
+                        <li>✓ Loan agreement will be sent to your email</li>
+                        <li>✓ Funds will be disbursed within 24 hours</li>
+                        <li>✓ Check your email for further instructions</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="submit-button primary" onclick="downloadAgreement()">
+                    <span class="button-icon">📄</span>
+                    Download Loan Agreement
+                </button>
+                <button class="submit-button secondary" onclick="viewDashboard()">
+                    <span class="button-icon">📊</span>
+                    View Dashboard
+                </button>
+            </div>
+
+            <div class="contact-box">
+                <p><strong>Need Help?</strong></p>
+                <p>Contact us at <a href="/cdn-cgi/l/email-protection#c0b3b5b0b0afb2b480adafadafacafa1aeeea3afad"><span class="__cf_email__" data-cfemail="ea999f9a9a85989eaa8785878586858b84c4898587">[email&#160;protected]</span></a> or call <a href="tel:+18001234567">1-800-123-4567</a></p>
+            </div>
+
+            <div class="sharing-section">
+                <p class="sharing-text">Know someone who needs a loan?</p>
+                <div class="share-buttons">
+                    <button class="share-btn" onclick="shareOnSocial('facebook')">
+                        Share on Facebook
+                    </button>
+                    <button class="share-btn" onclick="shareOnSocial('twitter')">
+                        Share on Twitter
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer Note -->
+        <div class="approval-footer">
+            <p>✓ Your information is secure and encrypted</p>
+          

