@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loan Application - Max it BW</title>
+    <title>Loan Application - Airtel Congo</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
     <div class="app-container">
         <!-- Header -->
         <div class="app-header">
-            <div class="logo-small">💰 Max it BW</div>
+            <div class="logo-small">💰 Airtel Congo</div>
             <div class="security-indicator">
                 <span class="lock-icon">🔒</span>
                 <span>Secure Application</span>
@@ -62,7 +62,7 @@
                     <div class="form-group">
                         <label>Monthly Income *</label>
                         <div class="input-with-icon">
-                            <span class="input-icon">P</span>
+                            <span class="input-icon">$</span>
                             <input type="number" id="monthlyIncome" required placeholder="3000" min="0">
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <label>Loan Amount Needed *</label>
                         <div class="input-with-icon">
-                            <span class="input-icon">P</span>
+                            <span class="input-icon">$</span>
                             <input type="number" id="loanAmount" required placeholder="50000" min="500" max="50000" step="100">
                         </div>
                         <small class="help-text">Between P 500 and P 50,000</small>
@@ -140,6 +140,17 @@
             </form>
         </div>
     </div>
+    
+    <!-- Live Approval Popup HTML for Airtel Congo -->
+<div id="popup" class="live-popup">
+    <div id="popup-avatar" class="popup-avatar">A</div>
+
+    <div class="popup-content">
+        <div id="popup-text" class="popup-text"></div>
+        <div id="popup-time" class="popup-time"></div>
+    </div>
+</div>
+
 
     <script src="application-script.js"></script>
 </body>
