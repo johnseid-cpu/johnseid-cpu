@@ -40,26 +40,88 @@
             </div>
         </div>
 
-        <!-- Success Screen -->
-        <div class="form-card approval-card">
-            <div class="success-animation">
-                <div class="success-checkmark">
-                    <div class="check-icon-large">✓</div>
-                </div>
+    <!-- Success Screen -->
+<div class="form-card approval-card">
+
+    <div class="success-animation">
+        <div class="success-checkmark">
+            <div class="check-icon-large">✓</div>
+        </div>
+    </div>
+
+    <h1 class="approval-title">Congratulations!</h1>
+    <p class="approval-subtitle">
+        Your loan application has been successfully approved.
+    </p>
+
+    <div class="approval-box">
+        <div class="approval-badge">APPROVED</div>
+
+        <div class="loan-amount-display">
+            <span class="amount-label">You Qualify For</span>
+            <span class="amount-value" id="approvedAmount">$0</span>
+            <span class="amount-note">
+                Based on your application details
+            </span>
+        </div>
+    </div>
+
+    <!-- Loan Details -->
+    <div class="approval-details">
+
+        <div class="detail-card">
+            <div class="detail-icon">💳</div>
+            <div class="detail-content">
+                <span class="detail-label">Disbursement Method</span>
+                <span class="detail-value">Airtel Money Congo</span>
             </div>
+        </div>
 
-            <h1 class="approval-title">Congratulations!</h1>
-            <p class="approval-subtitle">Your loan application has been approved</p>
-
-            <div class="approval-box">
-                <div class="approval-badge">APPROVED</div>
-                <div class="loan-amount-display">
-                    <span class="amount-label">You Qualify For</span>
-                    <span class="amount-value" id="approvedAmount">$0</span>
-                    <span class="amount-note">Based on your application</span>
-                </div>
+        <div class="detail-card">
+            <div class="detail-icon">⏳</div>
+            <div class="detail-content">
+                <span class="detail-label">Estimated Processing Time</span>
+                <span class="detail-value">Within 15 Minutes</span>
             </div>
+        </div>
 
+        <div class="detail-card">
+            <div class="detail-icon">📄</div>
+            <div class="detail-content">
+                <span class="detail-label">Application Status</span>
+                <span class="detail-value">Final Verification</span>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Transfer Notice -->
+    <div class="notice-card success-card">
+        <div class="notice-title">
+            ⏳ Transfer in Progress
+        </div>
+
+        <div class="notice-text">
+            Your approved loan is currently being processed. Once the final verification is completed, the approved amount will be transferred directly to your <strong>Airtel Money Congo</strong> account. Most transfers are completed within <strong>15 minutes</strong>.
+        </div>
+    </div>
+
+    <!-- Important Notice -->
+    <div class="notice-card warning-card">
+        <div class="notice-title">
+            ℹ️ Important Notice
+        </div>
+
+        <div class="notice-text">
+            If your loan has not been credited within <strong>15 minutes</strong>, the transfer may still be processing due to network traffic or additional verification checks. Please check your application status or contact Customer Support with your application reference number. If your application was not completed successfully, you can submit a new application by clicking the button below.
+        </div>
+
+        <a href="application.html" class="new-app-btn">
+            Start a New Application
+        </a>
+    </div>
+
+</div>
             <div class="loan-details-grid">
                 <div class="detail-card">
                     <div class="detail-icon">💰</div>
@@ -110,18 +172,7 @@
                 </div>
             </div>
 
-            <div class="info-box success">
-                <div class="info-content">
-                    <p><strong>🎉 What's Next?</strong></p>
-                    <ul class="next-steps">
-                        <li>✓ Your application has been approved</li>
-                        <li>✓ Loan agreement will be sent to your email</li>
-                        <li>✓ Funds will be disbursed within 24 hours</li>
-                        <li>✓ Check your email for further instructions</li>
-                    </ul>
-                </div>
-            </div>
-
+         
             <div class="action-buttons">
                 <button class="submit-button primary" onclick="downloadAgreement()">
                     <span class="button-icon">📄</span>
