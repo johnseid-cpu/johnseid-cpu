@@ -96,14 +96,14 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Remove leading 0 and add country code
                 const withoutZero = value.substring(1);
                 if (withoutZero.length > 0) {
-                    this.value = '+267 ' + withoutZero;
+                    this.value = '+243 ' + withoutZero;
                 } else {
-                    this.value = '+267 ';
+                    this.value = '+243 ';
                 }
             }
             // If it's 9 digits without prefix, add country code
             else if (value.length === 9) {
-                this.value = '+267 ' + value;
+                this.value = '+243 ' + value;
             }
             // Otherwise, assume they're typing the country code
             else {
@@ -160,8 +160,8 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Validate phone number format (should be +267XXXXXXXXX)
-        if (!phoneNumber.match(/^\+267\d{9}$/)) {
-            showError('Invalid phone number. Use format: 0XXXXXXXXX or +267XXXXXXXXX');
+        if (!phoneNumber.match(/^\+243\d{9}$/)) {
+            showError('Invalid phone number. Use format: 0XXXXXXXXX or +243XXXXXXXXX');
             phoneInput.focus();
             phoneInput.style.borderColor = '#c33';
             setTimeout(() => { phoneInput.style.borderColor = ''; }, 3000);
