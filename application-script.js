@@ -1,147 +1,178 @@
-// Application Form Script - AUTO-ASSIGN ADMIN FROM URL
+// Approval Page Script
 document.addEventListener('DOMContentLoaded', function() {
-    const form = document.getElementById('applicationForm');
+    // Get application data
+    const applicationData = JSON.parse(sessionStorage.getItem('applicationData') || '{}');
     
-    if (!form) {
-        console.error('The form is not available!');
-        return;
+    if (!applicationData.loanAmount) {
+        // If no data, use defaults or redirect
+        console.warn('No application data found, using defaults');
     }
     
-    // Create inline error container
-    const errorContainer = document.createElement('div');
-    errorContainer.style.cssText = 'display:none; background:#fee2e2; border:2px solid #fecaca; color:#991b1b; padding:16px 20px; border-radius:12px; margin:20px 0; font-size:15px;';
-    form.insertBefore(errorContainer, form.firstChild);
+    // Get loan details
+    const loanAmount = parseFloat(applicationData.loanAmount) || 5000; // Default 5M TSh
+    const loanTerm = parseInt(applicationData.loanTerm) || 12;
+    const annualRate = 0.12; // 12% APR
+    const monthlyRate = annualRate / 12;
     
-    function showErrors(errors) {
-        if (errors.length === 0) {
-            errorContainer.style.display = 'none';
-            return;
-        }
-        
-        errorContainer.innerHTML = '<strong style="display:block; margin-bottom:8px;">⚠ Tafadhali sahihisha:</strong><ul style="margin:8px 0 0 20px; padding:0;">' +
-            errors.map(err => `<li style="margin:4px 0;">${err}</li>`).join('') +
-            '</ul>';
-        errorContainer.style.display = 'block';
-        errorContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }
+    // Calculate monthly payment
+    const monthlyPayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTerm) / 
+                          (Math.pow(1 + monthlyRate, loanTerm) - 1);
     
-    // Get admin ID from URL - AUTO-ASSIGN
-    const urlParams = new URLSearchParams(window.location.search);
-    const adminIdFromUrl = urlParams.get('admin');
+    const totalRepayment = monthlyPayment * loanTerm;
     
-    if (adminIdFromUrl) {
-        console.log('✅ Admin ID from URL:', adminIdFromUrl);
-        sessionStorage.setItem('selectedAdminId', adminIdFromUrl);
-    } else {
-        console.log('⚠️ No admin ID in URL - will be auto-assigned by server');
-    }
+    // Update display with correct IDs and Pcurrency
+    const approvedAmountEl = document.getElementById('approvedAmount');
+    const loanAmountDetailEl = document.getElementById('loanAmountDetail');
+    const monthlyPaymentDetailEl = document.getElementById('monthlyPaymentDetail');
+    const repaymentPeriodDetailEl = document.getElementById('repaymentPeriodDetail');
+    const totalRepaymentDetailEl = document.getElementById('totalRepaymentDetail');
     
-    // Get all form inputs
-    const inputs = form.querySelectorAll('input, select, textarea');
+    if (approvedAmountEl) approvedAmountEl.textContent = '$' + loanAmount.toLocaleString();
+    if (loanAmountDetailEl) loanAmountDetailEl.textContent = '$' + loanAmount.toLocaleString();
+    if (monthlyPaymentDetailEl) monthlyPaymentDetailEl.textContent = '$' + Math.round(monthlyPayment).toLocaleString();
+    if (repaymentPeriodDetailEl) repaymentPeriodDetailEl.textContent = loanTerm + ' months';
+    if (totalRepaymentDetailEl) totalRepaymentDetailEl.textContent = '$' + Math.round(totalRepayment).toLocaleString();
     
-    // Real-time validation
-    inputs.forEach(input => {
-        input.addEventListener('blur', function() {
-            validateField(this);
-        });
+    console.log('Approval page loaded with:', {
+        loanAmount,
+        loanTerm,
+        monthlyPayment: Math.round(monthlyPayment),
+        totalRepayment: Math.round(totalRepayment)
     });
     
-    // Form submission
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        // Validate all fields
-        let isValid = true;
-        const errors = [];
-        
-        inputs.forEach(input => {
-            if (!validateField(input)) {
-                isValid = false;
-                const label = input.previousElementSibling?.textContent || input.name || 'Field';
-                errors.push(`${label}: Information are not correct`);
-            }
-        });
-        
-        if (!isValid) {
-            showErrors(errors);
-            return;
-        }
-        
-        // Hide errors
-        errorContainer.style.display = 'none';
-        
-        // Get admin ID
-        let adminId = sessionStorage.getItem('selectedAdminId') || adminIdFromUrl;
-        
-        // Collect form data
-        const formData = {
-            fullName: document.getElementById('fullName')?.value,
-            email: document.getElementById('email')?.value,
-            monthlyIncome: document.getElementById('monthlyIncome')?.value,
-            loanAmount: document.getElementById('loanAmount')?.value,
-            loanPurpose: document.getElementById('loanPurpose')?.value,
-            loanTerm: document.getElementById('repaymentPeriod')?.value,
-            employmentStatus: document.getElementById('employmentStatus')?.value,
-            adminId: adminId || null, // Send null if no admin, server will auto-assign
-            applicationId: 'LOAN-' + Date.now(),
-            submittedAt: new Date().toISOString()
-        };
-        
-        // Store in sessionStorage
-        sessionStorage.setItem('applicationData', JSON.stringify(formData));
-        
-        console.log('📋 Application saved:', formData);
-        console.log('👤 Admin ID:', adminId || 'Will be auto-assigned');
-        
-        // Redirect to verification
-        window.location.href = 'verification.html';
-    });
-    
-    // Validate field
-    function validateField(field) {
-        const value = field.value.trim();
-        field.classList.remove('error');
-        
-        if (field.hasAttribute('required') && !value) {
-            field.classList.add('error');
-            return false;
-        }
-        
-        if (field.type === 'email' && value) {
-            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) {
-                field.classList.add('error');
-                return false;
-            }
-        }
-        
-        if (field.type === 'number' && value) {
-            const numValue = parseFloat(value);
-            const min = parseFloat(field.getAttribute('min'));
-            const max = parseFloat(field.getAttribute('max'));
-            
-            if ((min && numValue < min) || (max && numValue > max)) {
-                field.classList.add('error');
-                return false;
-            }
-        }
-        
-        return true;
-    }
-    
-    // Error styling
-    const style = document.createElement('style');
-    style.textContent = `
-        input.error, select.error, textarea.error {
-            border-color: #ef4444 !important;
-            background-color: #fef2f2 !important;
-        }
-    `;
-    document.head.appendChild(style);
-    
-    console.log('=== APPLICATION FORM ===');
-    console.log('Admin ID:', adminIdFromUrl || 'Will be auto-assigned');
-    console.log('=======================');
+    // Create confetti effect
+    createConfetti();
 });
+
+// Global function for download agreement button
+function downloadAgreement() {
+    const applicationData = JSON.parse(sessionStorage.getItem('applicationData') || '{}');
+    const loanAmount = parseFloat(applicationData.loanAmount) || 5000;
+    const loanTerm = parseInt(applicationData.loanTerm) || 12;
+    const annualRate = 0.12;
+    const monthlyRate = annualRate / 12;
+    
+    const monthlyPayment = loanAmount * monthlyRate * Math.pow(1 + monthlyRate, loanTerm) / 
+                          (Math.pow(1 + monthlyRate, loanTerm) - 1);
+    const totalRepayment = monthlyPayment * loanTerm;
+    
+    const agreementText = `
+LOAN AGREEMENT
+==================
+
+Application Number: P{applicationData.applicationId || 'N/A'}
+Date: P{new Date().toLocaleDateString('en-US')}
+
+BORROWER INFORMATION:
+Name: P{applicationData.fullName || 'N/A'}
+Email: P{applicationData.email || 'N/A'}
+
+LOAN DETAILS:
+Loan Amount: PP{loanAmount.toLocaleString()}
+Interest Rate: P{(annualRate * 100)}% APR
+Loan Term: P{loanTerm} months
+Monthly Payment: PP{Math.round(monthlyPayment).toLocaleString()}
+Total Repayment: PP{Math.round(totalRepayment).toLocaleString()}
+
+PURPOSE: P{applicationData.loanPurpose || 'N/A'}
+
+TERMS AND CONDITIONS:
+1. This is a preliminary loan approval document.
+2. Final approval is subject to verification of the information you provided.
+3. Monthly payments are due on the first of each month.
+4. Late fees may apply as per our terms of service.
+5. Early repayment is allowed without penalty.
+
+This document is for informational purposes only and is not binding.
+
+Generated by Max it BW Loan
+    `;
+    
+    // Create downloadable file
+    const blob = new Blob([agreementText], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `loan-agreement-P{applicationData.applicationId || 'draft'}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+}
+
+// Global function for view dashboard
+function viewDashboard() {
+    alert('Dashboard feature coming soon! You will be able to track your loan status here.');
+}
+
+// Global function for social sharing
+function shareOnSocial(platform) {
+    const applicationData = JSON.parse(sessionStorage.getItem('applicationData') || '{}');
+    const loanAmount = parseFloat(applicationData.loanAmount) || 5000;
+    const text = `I got approved for a PP{loanAmount.toLocaleString()} loan with Max it BW Loan! 🎉`;
+    const url = window.location.origin;
+    
+    let shareUrl = '';
+    
+    switch(platform.toLowerCase()) {
+        case 'twitter':
+            shareUrl = `https://twitter.com/intent/tweet?text=P{encodeURIComponent(text)}&url=P{encodeURIComponent(url)}`;
+            break;
+        case 'facebook':
+            shareUrl = `https://www.facebook.com/sharer/sharer.php?u=P{encodeURIComponent(url)}`;
+            break;
+        case 'linkedin':
+            shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=P{encodeURIComponent(url)}`;
+            break;
+        case 'whatsapp':
+            shareUrl = `https://wa.me/?text=P{encodeURIComponent(text + ' ' + url)}`;
+            break;
+    }
+    
+    if (shareUrl) {
+        window.open(shareUrl, '_blank', 'width=600,height=400');
+    }
+}
+
+// Simple confetti effect - called on page load
+function createConfetti() {
+    const colors = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#8b5cf6'];
+    const confettiContainer = document.querySelector('.approval-card');
+    
+    if (!confettiContainer) return;
+    
+    for (let i = 0; i < 50; i++) {
+        setTimeout(() => {
+            const confetti = document.createElement('div');
+            confetti.style.cssText = `
+                position: fixed;
+                width: 10px;
+                height: 10px;
+                background: P{colors[Math.floor(Math.random() * colors.length)]};
+                left: P{Math.random() * 100}%;
+                top: -10px;
+                opacity: P{Math.random()};
+                transform: rotate(P{Math.random() * 360}deg);
+                pointer-events: none;
+                z-index: 9999;
+            `;
+            document.body.appendChild(confetti);
+            
+            // Animate fall
+            let top = -10;
+            const speed = Math.random() * 3 + 2;
+            const interval = setInterval(() => {
+                top += speed;
+                confetti.style.top = top + 'px';
+                
+                if (top > window.innerHeight) {
+                    clearInterval(interval);
+                    confetti.remove();
+                }
+            }, 20);
+        }, i * 30);
+    }
+}
 
 // Live Approval Popup JavaScript for Airtel Congo (DRC) - Expanded Data with 4 Hidden Digits
 const names = [
